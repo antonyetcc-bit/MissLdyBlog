@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprende con Mis Lady</title>
+    <style>
+        /* ESTILOS GENERALES (Tema Infantil) */
+        :root {
+            --primary-pink: #ffb7e6;
+            --dark-pink: #ff85c0;
+            --bg-color: #ffe6f2; /* Fondo rosado claro como en la imagen */
+            --card-bg: #ffffff;
+            --text-color: #555;
+            --yellow-btn: #ffd700;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+            background: linear-gradient(180deg, var(--bg-color) 0%, #e6f7ff 100%);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        /* HEADER Y NAV */
+        header {
+            background-color: var(--primary-pink);
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: white;
+            text-shadow: 2px 2px 0px var(--dark-pink);
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            background-color: white;
+            padding: 15px;
+            border-radius: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255,255,255,0.5);
+        }
+
+        .nav-btn {
+            background-color: #ff91d6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            transform: scale(1.1);
+            background-color: #ff6eb9;
+        }
+
+        /* SECCIONES DE JUEGOS */
+        section {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: #8a6eff;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        /* GRID PARA TARJETAS */
+        .grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 20px;
+            width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--primary-pink);
+            transform: translateY(-5px);
+        }
+
+        /* JUEGO NÚMEROS */
+        .number-box {
+            background-color: var(--yellow-btn);
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        /* JUEGO COLORES (Manchas) */
+        .splash {
+            width: 100px;
+            height: 100px;
+            border-radius: 50% 60% 40% 70% / 60% 50% 70% 40%; /* Forma irregular tipo mancha */
+            margin-bottom: 15px;
+            animation: wobble 3s infinite ease-in-out;
+        }
+        
+        @keyframes wobble {
+            0%, 100% { border-radius: 50% 60% 40% 70% / 60% 50% 70% 40%; }
+            50% { border-radius: 60% 40% 50% 60% / 50% 70% 40% 60%; }
+        }
+
+        .btn-reveal {
+            background-color: var(--primary-pink);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        /* ADIVINANZAS */
+        .riddle-container {
+            background-color: #fff8e1; /* Amarillo pálido */
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid #ffd54f;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .riddle-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 300px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .riddle-question {
+            font-size: 5rem;
+            color: orange;
+            margin: 0;
+        }
+
+        .option-card {
+            cursor: pointer;
+            border: 2px solid #eee;
+            border-radius: 15px;
+            padding: 10px;
+            background: white;
+            width: 150px;
+        }
+        
+        .option-card img, .option-card span {
+            font-size: 4rem;
+            display: block;
+        }
+
+        .option-card:hover {
+            background-color: #e6fffa;
+            border-color: #4db6ac;
+        }
+
+        /* COMENTARIOS */
+        .comments-section {
+            background-color: white;
+            border-radius: 25px;
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 800px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        textarea {
+            width: 90%;
+            height: 100px;
+            border: 2px solid var(--primary-pink);
+            border-radius: 15px;
+            padding: 15px;
+            font-size: 1rem;
+            resize: none;
+            outline: none;
+        }
+
+        .rating {
+            margin: 20px 0;
+            font-size: 1.5rem;
+        }
+
+        .star {
+            color: gold;
+            cursor: pointer;
+        }
+
+        .btn-send {
+            background-color: #ff85c0;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 20px;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .btn-send:hover {
+            background-color: #ff5ca0;
+        }
+
+        /* Utilidad para ocultar/mostrar respuestas */
+        .hidden-answer {
+            display: none;
+            margin-top: 10px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🌟 Blog Educativo Infantil - Aprende con Miss Lady 🌟</h1>
+    </header>
+
+    <div class="subtitle">
+        <p><strong>¡Bienvenidos!</strong> Los <em>edublogs</em> son aquellos weblogs cuyo principal objetivo es apoyar el proceso de enseñanza-aprendizaje en un contexto educativo. Aquí encontrarás juegos divertidos para aprender.</p>
+    </div>
+
+    <nav>
+        <a href="#numeros" class="nav-btn">🔢 Números</a>
+        <a href="#colores" class="nav-btn">🎨 Colores</a>
+        <a href="#adivinanzas" class="nav-btn">❓ Adivinanzas</a>
+        <a href="#comentarios" class="nav-btn">⭐ Comentarios</a>
+    </nav>
+
+    <section id="numeros">
+        <h2>🔢 Aprende los Números</h2>
+        <div class="grid-container">
+            <div class="card">
+                <p>¿Qué número es?</p>
+                <div class="number-box" onclick="sayNumber('Uno')">1</div>
+            </div>
+            <div class="card">
+                <p>¿Qué número es?</p>
+                <div class="number-box" onclick="sayNumber('Dos')">2</div>
+            </div>
+            <div class="card">
+                <p>¿Qué número es?</p>
+                <div class="number-box" onclick="sayNumber('Tres')">3</div>
+            </div>
+            <div class="card">
+                <p>¿Qué número es?</p>
+                <div class="number-box" onclick="sayNumber('Cuatro')">4</div>
+            </div>
+            <div class="card">
+                <p>¿Qué número es?</p>
+                <div class="number-box" onclick="sayNumber('Cinco')">5</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="colores">
+        <h2>🎨 Aprende los Colores</h2>
+        <div class="grid-container">
+            <div class="card">
+                <div class="splash" style="background-color: #d32f2f;"></div>
+                <button class="btn-reveal" onclick="revealColor(this, '¡Rojo!')">¿Qué color es?</button>
+                <div class="hidden-answer"></div>
+            </div>
+            <div class="card">
+                <div class="splash" style="background-color: #1976d2;"></div>
+                <button class="btn-reveal" onclick="revealColor(this, '¡Azul!')">¿Qué color es?</button>
+                <div class="hidden-answer"></div>
+            </div>
+            <div class="card">
+                <div class="splash" style="background-color: #fbc02d;"></div>
+                <button class="btn-reveal" onclick="revealColor(this, '¡Amarillo!')">¿Qué color es?</button>
+                <div class="hidden-answer"></div>
+            </div>
+            <div class="card">
+                <div class="splash" style="background-color: #388e3c;"></div>
+                <button class="btn-reveal" onclick="revealColor(this, '¡Verde!')">¿Qué color es?</button>
+                <div class="hidden-answer"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="adivinanzas">
+        <h2>❓ Adivinanzas</h2>
+        <div class="riddle-container">
+            <div class="riddle-card">
+                <div class="riddle-question">?</div>
+                <p>Blanco por dentro, verde por fuera. Si quieres que te lo diga, espera. <strong>¿Qué soy?</strong></p>
+            </div>
+            
+            <div class="option-card" onclick="checkRiddle(false)">
+                <span>🐟</span>
+                <p>Pez</p>
+            </div>
+            <div class="option-card" onclick="checkRiddle(false)">
+                <span>🦒</span>
+                <p>Jirafa</p>
+            </div>
+            <div class="option-card" onclick="checkRiddle(true)">
+                <span>🍌</span>
+                <p>Plátano</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="comentarios">
+        <div class="comments-section">
+            <h2>⭐ Comentarios y Calificaciones</h2>
+            <textarea id="commentBox" placeholder="Escribe tu comentario aquí..."></textarea>
+            
+            <div class="rating">
+                Calificación: 
+                <span class="star" onclick="rate(1)">★</span>
+                <span class="star" onclick="rate(2)">★</span>
+                <span class="star" onclick="rate(3)">★</span>
+                <span class="star" onclick="rate(4)">★</span>
+                <span class="star" onclick="rate(5)">★</span>
+                <span id="rating-value">0</span>/5
+            </div>
+
+            <button class="btn-send" onclick="sendComment()">Enviar</button>
+        </div>
+    </section>
+
+    <script>
+        // Juego de Números
+        function sayNumber(numText) {
+            alert("¡Es el número " + numText + "!");
+        }
+
+        // Juego de Colores
+        function revealColor(btn, colorName) {
+            const answerDiv = btn.nextElementSibling;
+            answerDiv.innerText = colorName;
+            answerDiv.style.display = 'block';
+            answerDiv.style.fontSize = '1.2rem';
+            btn.style.display = 'none'; // Ocultar botón
+        }
+
+        // Juego de Adivinanzas
+        function checkRiddle(isCorrect) {
+            if(isCorrect) {
+                alert("¡Correcto! 🎉 Es el plátano (o la pera en otras versiones, pero aquí es la fruta amarilla).");
+            } else {
+                alert("Ups, inténtalo de nuevo. 🤔");
+            }
+        }
+
+        // Sistema de Comentarios
+        let currentRating = 0;
+        function rate(stars) {
+            currentRating = stars;
+            document.getElementById('rating-value').innerText = stars;
+            // Visualmente pintar estrellas (simple)
+            let allStars = document.querySelectorAll('.star');
+            allStars.forEach((s, index) => {
+                if(index < stars) s.style.color = 'orange';
+                else s.style.color = 'gold';
+            });
+        }
+
+        function sendComment() {
+            const text = document.getElementById('commentBox').value;
+            if(text.trim() === "") {
+                alert("Por favor escribe un comentario.");
+                return;
+            }
+            alert("¡Gracias por tu comentario! \nCalificación: " + currentRating + " estrellas.\nMensaje: " + text);
+            // Limpiar formulario
+            document.getElementById('commentBox').value = "";
+            rate(0);
+        }
+    </script>
+
+</body>
+</html>
